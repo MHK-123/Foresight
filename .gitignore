@@ -1,0 +1,29 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Large raw & cleaned data folders
+Retail 2/
+data_cleaned/
+features/daily_store_sku_features.parquet
+*.pbix
+
+# Keep sample datasets, models, eda charts, and dashboard data
+!features/daily_store_sku_features_sample.csv
+!risk_engine_outputs/inventory_risk_scored.parquet
+!risk_engine_outputs/inventory_risk_scored_sample.csv
+!dashboard_data/*
+!models/*
+!eda_charts/*
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

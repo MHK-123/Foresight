@@ -1,0 +1,24 @@
+#Dashboard Flow:
+Company Overview -> Sales Performance -> Customer Demand -> Product Performance -> Inventory Health -> Stock Risk -> Promotion Analysis -> Seasonality -> Forecast -> Executive Summary -> Recommendation
+
+#Power BI Dashboard:
+Page 1: Executive Dashboard
+Page 2: Sales Analytics Dashboard
+Page 3: Product Performance Dashboard
+Page 4: Category Performance Dashboard
+Page 5: Inventory Dashboard
+Page 6: Stockout Risk Dashboard
+Page 7: Overstock Dashboard
+Page 8: Promotion Dashboard
+Page 9: Seasonality Dashboard
+Page 10: Forecast Dashboard
+Page 11: Customer & Business Insights
+Page 12: Executive Recommendation Dashboard
+
+#Project Timeline
+Week 1: Data Understanding & Data Preparation
+Week 2: Data Analysis & Build Core Analytics Dashboards
+Week 3: Advanced Analytics Dashboard
+Week 4: Executive Insights, Finalization & Recommendation
+
+

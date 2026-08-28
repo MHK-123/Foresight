@@ -1,0 +1,33 @@
+#Streamlit Dashboards
+Home Page
+Sales Analytics
+Forecast
+Inventory Dashboard
+Risk Dashboard
+Product Details
+Executive Summary Dashboard
+
+#Executive Presentation
+1. Business Problem
+2. Client Background
+3. Dataset
+4. Data Cleaning
+5. EDA Insights
+6. Forecast Model
+7. Model Performance
+8. Risk Scoring
+9. Dashboard
+10. Deployment and Business Recommendation
+
+#Complete Development Plan
+1.Project Setup & Architecture
+2.Data pipeline
+3.EDA
+4.Feature Engineering
+5.Forecasting Models
+6.Risk Scoring Engine
+7.Professional Streamlit Dashboard
+8.Flask/FastAPI Prediction Service
+9.Deployment
+10. Documentation
+11.Final Submission

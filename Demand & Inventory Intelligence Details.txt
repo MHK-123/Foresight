@@ -1,0 +1,29 @@
+Datasets:
+sales_daily.csv
+sku_master.csv
+calender.csv
+inventory_snapshots.csv
+
+#COMPLETE WORKFLOW
+1.Understand the business and the datasets
+2.Data Collection
+3.Data cleaning
+4.EDA
+5.Feature Engineering
+6.Build Baseline Model
+7.Machine Learning Forecast(XGBoost, LightBGM, Random Foresr, Prophet, ARIMA/SARIMA,  etc...)
+8.Model Evaluation
+9.Risk Scoring
+10.Streamlit Dashboard
+11.Deployment
+12.Executive Summary
+
+#Project Foresight
+Phase 1: Business Understanding
+Phase 2: Data Collection and Data Engineering
+Phase 3: EDA
+Phase 4: Feature Engineering
+Phase 5: Demand Forecasting
+Phase 6: Risk Scoring
+Phase 7: Dashboard Development
+Phase 8: Deployment and Documentation
