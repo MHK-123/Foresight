@@ -39,13 +39,25 @@ CUSTOM_CSS = """
     --purple-overstock: #7C3AED;
 }
 
-html, body, [class*="css"], .stMarkdown, .stText, p, span, label, div, input, button {
+/* Typography without breaking Streamlit Icon Ligatures */
+html, body, .stMarkdown p, .stText, label, .metric-title, .metric-value, .metric-subtitle {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .stApp {
     background-color: #FFFFFF !important;
     color: #0F172A !important;
+}
+
+/* PRESERVE STREAMLIT MATERIAL ICONS & SYMBOLS (Prevents 'keyboard_double_arrow' text) */
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-icons,
+[data-testid="stIconMaterial"],
+[data-testid="stSidebarCollapseButton"] span,
+[data-testid="stSidebarCollapseButton"] i,
+[data-testid="collapsedControl"] span {
+    font-family: 'Material Symbols Rounded', 'Material Icons' !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -56,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
 }
 
-/* BaseWeb Dropdowns & Popover Menus Fix */
+/* Dropdowns & Popovers */
 div[data-baseweb="popover"],
 div[data-baseweb="menu"],
 ul[role="listbox"],
@@ -101,19 +113,42 @@ div[data-baseweb="select"] [data-baseweb="tag"] {
     font-weight: 600 !important;
 }
 
-/* Sidebar */
+/* Sidebar Custom Styling */
 [data-testid="stSidebar"] {
     background-color: #F8FAFC !important;
     border-right: 1px solid #E2E8F0 !important;
-    padding: 1.5rem 1rem !important;
+    padding: 1.2rem 1rem !important;
 }
 
 [data-testid="stSidebar"] label {
     font-weight: 700 !important;
     color: #1E293B !important;
-    font-size: 0.82rem !important;
+    font-size: 0.80rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.04em !important;
+}
+
+/* Sidebar Profile Block */
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 12px 0 16px 0;
+}
+.user-avatar-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563EB;
 }
 
 /* Radio Navigation */
@@ -198,7 +233,7 @@ div[data-baseweb="select"] [data-baseweb="tag"] {
     background-color: #1D4ED8 !important;
 }
 
-/* Chat Bubbles */
+/* Chat */
 .chat-user {
     background-color: #EFF6FF;
     border: 1px solid #BFDBFE;
@@ -283,12 +318,43 @@ def load_all_data():
 df_inv, df_ts, df_feat, model_meta = load_all_data()
 
 # -------------------------------------------------------------
-# 5. SIDEBAR & GLOBAL FILTERS
+# 5. SIDEBAR WITH CLEAN PROFILE & BRANDING (NO BROKEN LIGATURES)
 # -------------------------------------------------------------
 with st.sidebar:
-    st.markdown("<div style='font-size: 1.4rem; font-weight: 900; color: #0F172A; letter-spacing: -0.03em;'>FORESIGHT <span style='font-size: 0.75rem; background: #DBEAFE; color: #1D4ED8; padding: 2px 6px; border-radius: 4px; vertical-align: middle;'>v1.0</span></div>", unsafe_allow_html=True)
-    st.markdown("<div style='font-size: 0.85rem; font-weight: 500; color: #475569; margin-bottom: 12px;'>Demand & Inventory Intelligence</div>", unsafe_allow_html=True)
-    st.markdown("<hr style='margin: 8px 0 16px 0; border: none; border-top: 1px solid #E2E8F0;'>", unsafe_allow_html=True)
+    # Top Branding Block
+    st.markdown(
+        """
+        <div style='margin-bottom: 8px;'>
+            <div style='display: flex; align-items: center; justify-content: space-between;'>
+                <span style='font-size: 1.45rem; font-weight: 900; color: #0F172A; letter-spacing: -0.03em;'>FORESIGHT</span>
+                <span style='font-size: 0.72rem; font-weight: 700; background: #DBEAFE; color: #1D4ED8; padding: 2px 8px; border-radius: 4px;'>v1.0</span>
+            </div>
+            <div style='font-size: 0.82rem; font-weight: 600; color: #475569; margin-top: 2px;'>Demand & Inventory Intelligence</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # Professional Outline User / Organization Profile Card (Clean SVG Avatar)
+    st.markdown(
+        """
+        <div class="user-profile-card">
+            <div class="user-avatar-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <div style='line-height: 1.25;'>
+                <div style='font-size: 0.85rem; font-weight: 700; color: #0F172A;'>NorthBay Living</div>
+                <div style='font-size: 0.75rem; color: #64748B;'>Retail Analytics Workspace</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("<hr style='margin: 8px 0 14px 0; border: none; border-top: 1px solid #E2E8F0;'>", unsafe_allow_html=True)
 
     page = st.radio(
         "OPERATIONAL VIEWS",
@@ -306,7 +372,7 @@ with st.sidebar:
     )
 
     st.markdown("<hr style='margin: 16px 0; border: none; border-top: 1px solid #E2E8F0;'>", unsafe_allow_html=True)
-    st.markdown("<div style='font-size: 0.82rem; font-weight: 700; color: #0F172A; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;'>FILTER NETWORK</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size: 0.80rem; font-weight: 800; color: #0F172A; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;'>FILTER NETWORK</div>", unsafe_allow_html=True)
     
     all_stores = sorted(df_inv["store_id"].dropna().unique().tolist()) if not df_inv.empty else []
     sel_stores = st.multiselect("Store Location", all_stores, placeholder="All 30 Stores", default=[])
@@ -324,10 +390,9 @@ with st.sidebar:
     st.markdown(
         f"""
         <div style='background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; font-size: 0.78rem; color: #334155; line-height: 1.5;'>
-        <b style='color: #0F172A;'>Enterprise Metadata</b><br>
-        • <b>Client:</b> NorthBay Living<br>
-        • <b>Engine:</b> {model_meta.get('model_name', 'LightGBM Model 2')}<br>
-        • <b>Test WAPE:</b> <span style='color: #059669; font-weight: 700;'>{model_meta.get('test_wape', 42.16)}%</span> (Bias: {model_meta.get('test_bias', -0.01)}%)<br>
+        <b style='color: #0F172A;'>Engine Parameters</b><br>
+        • <b>Forecasting Model:</b> {model_meta.get('model_name', 'LightGBM Model 2')}<br>
+        • <b>Out-of-Sample WAPE:</b> <span style='color: #059669; font-weight: 700;'>{model_meta.get('test_wape', 42.16)}%</span><br>
         • <b>Inventory Nodes:</b> {len(df_inv):,} positions
         </div>
         """,
@@ -591,7 +656,7 @@ elif page == "5. Inventory Explorer":
     st.dataframe(df_exp[exp_cols].head(300), width="stretch", hide_index=True)
 
 # -------------------------------------------------------------
-# 11. PAGE 6: PRIORITY ACTION CENTER (NEW!)
+# 11. PAGE 6: PRIORITY ACTION CENTER
 # -------------------------------------------------------------
 elif page == "6. Priority Action Center":
     st.markdown("## **Priority Operational Action Center**")
@@ -658,7 +723,6 @@ elif page == "6. Priority Action Center":
         st.markdown("#### **Priority 4: Inter-Store Inventory Transfer Optimization**")
         st.markdown("<p style='color: #475569; font-size: 0.9rem;'>Automatically match stores with <b>0 stock</b> against network stores carrying <b>excess inventory (&gt;90 DOS)</b> for the exact same SKU.</p>", unsafe_allow_html=True)
         
-        # Calculate cross-store transfer opportunities
         stockout_skus = set(df_inv[df_inv["stock_on_hand"] == 0]["sku_id"].unique())
         overstock_skus = set(df_inv[df_inv["days_of_supply"] > 90]["sku_id"].unique())
         transfer_skus = stockout_skus.intersection(overstock_skus)
@@ -692,7 +756,7 @@ elif page == "6. Priority Action Center":
             st.info("No inter-store transfer matches found.")
 
 # -------------------------------------------------------------
-# 12. PAGE 7: WHAT-IF INVENTORY SIMULATOR (NEW!)
+# 12. PAGE 7: WHAT-IF INVENTORY SIMULATOR
 # -------------------------------------------------------------
 elif page == "7. What-If Simulator":
     st.markdown("## **What-If Inventory Scenario Simulator**")
@@ -702,14 +766,11 @@ elif page == "7. What-If Simulator":
     
     with sim_col1:
         st.markdown("#### **1. Configure Simulation Parameters**")
-        
         sim_store = st.selectbox("Select Store Location", sorted(df_inv["store_id"].unique().tolist()), index=0)
         sim_skus = sorted(df_inv[df_inv["store_id"] == sim_store]["sku_id"].unique().tolist())
         sim_sku = st.selectbox("Select Product SKU", sim_skus, index=0)
         
-        # Load baseline node values
         base_node = df_inv[(df_inv["store_id"] == sim_store) & (df_inv["sku_id"] == sim_sku)].iloc[0]
-        
         st.markdown(f"""<div class="alert-box"><b>Selected Item:</b> {base_node['sku_name']}<br>• Category: {base_node['category']} | Price: Rs. {base_node['unit_price']:.1f}</div>""", unsafe_allow_html=True)
         
         st.markdown("**Simulated Inputs:**")
@@ -721,12 +782,9 @@ elif page == "7. What-If Simulator":
 
     with sim_col2:
         st.markdown("#### **2. Real-Time Risk Simulation Output**")
-        
-        # Calculate simulated metrics
         sim_f_lead = sim_demand * sim_lead_time
         sim_dos = (sim_stock / sim_demand) if sim_demand > 0 else 999.0
         
-        # Evaluate simulated risk
         if sim_stock == 0:
             sim_status = "CRITICAL_STOCKOUT"
             sim_color = "#E11D48"
@@ -764,7 +822,6 @@ elif page == "7. What-If Simulator":
             
         st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
         
-        # Gauge Chart
         fig_gauge = go.Figure(go.Indicator(
             mode="gauge+number+delta",
             value=sim_dos,
@@ -816,7 +873,6 @@ elif page == "8. Intelligence Assistant":
         q_lower = user_query.lower()
         st.markdown(f"""<div class="chat-user">User: {user_query}</div>""", unsafe_allow_html=True)
         
-        # Grounded Answer Logic
         with st.spinner("Analyzing verified project outputs..."):
             if "stockout" in q_lower or "zero stock" in q_lower or "shortage" in q_lower:
                 crit_nodes = df_filtered[df_filtered["risk_status"] == "CRITICAL_STOCKOUT"]
@@ -885,7 +941,6 @@ elif page == "8. Intelligence Assistant":
 
     st.markdown("<hr style='margin: 24px 0; border: none; border-top: 1px solid #E2E8F0;'>", unsafe_allow_html=True)
     
-    # Explainable SKU Deep Dive Inspector
     st.markdown("#### **Single-Item 'Explain This Risk' Diagnostic Tool**")
     d_c1, d_c2 = st.columns([1, 2])
     with d_c1:
