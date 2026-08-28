@@ -399,6 +399,35 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
+    # Compliance, Privacy & Terms Section
+    st.markdown("<hr style='margin: 14px 0 8px 0; border: none; border-top: 1px solid #E2E8F0;'>", unsafe_allow_html=True)
+    with st.expander("🔒 Privacy Policy & Governance"):
+        st.markdown(
+            """
+            <div style='font-size: 0.76rem; color: #334155; line-height: 1.45;'>
+            <b>Data Governance & Non-PII:</b><br>
+            • FORESIGHT processes store transactions and inventory metadata strictly for demand forecasting and inventory optimization.<br>
+            • <b>Zero PII:</b> No customer names, payment records, or personal contact details are stored or processed.<br>
+            • All dataset records and model artifacts are maintained within isolated enterprise partitions.
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with st.expander("⚖️ Terms of Service (TOS)"):
+        st.markdown(
+            """
+            <div style='font-size: 0.76rem; color: #334155; line-height: 1.45;'>
+            <b>Decision-Support Terms:</b><br>
+            • Demand forecasts and inventory risk classifications are statistical projections intended as decision-support aids.<br>
+            • All purchase orders, emergency reorders, markdowns, and inventory transfers require human review and authorization before execution.<br>
+            • Proprietary analytics developed for NorthBay Living supply chain operations.
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+
 df_filtered = df_inv.copy()
 if sel_stores:
     df_filtered = df_filtered[df_filtered["store_id"].isin(sel_stores)]

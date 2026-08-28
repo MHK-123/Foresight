@@ -91,5 +91,16 @@ streamlit run app.py
 ├── eda_charts/                           # Visualizations from Step 3 EDA
 ├── features/                             # Sample engineered feature dataset
 │   └── daily_store_sku_features_sample.csv
+├── requirements.txt                      # Application dependencies
+├── PRIVACY_POLICY.md                     # Data governance and privacy disclosure
+├── TERMS_OF_SERVICE.md                   # Enterprise terms and forecasting disclaimer
 └── README.md                             # Project documentation
 ```
+
+---
+
+## Governance & Compliance
+
+* **Privacy Policy:** [PRIVACY_POLICY.md](file:///h:/Coding/Foresight/PRIVACY_POLICY.md)
+* **Terms of Service:** [TERMS_OF_SERVICE.md](file:///h:/Coding/Foresight/TERMS_OF_SERVICE.md)
+
