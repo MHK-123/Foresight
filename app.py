@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 # 1. PAGE CONFIGURATION
 # -------------------------------------------------------------
 st.set_page_config(
-    page_title="FORESIGHT — Retail Demand & Inventory Intelligence",
+    page_title="FORESIGHT Retail Demand & Inventory Intelligence",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"

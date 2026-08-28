@@ -1,4 +1,4 @@
-# Project FORESIGHT - Retail Demand & Inventory Intelligence
+# Project FORESIGHT Retail Demand & Inventory Intelligence
 
 Client: NorthBay Living  
 Role: Data Science & Analytics Intern (Zidio Internship Project)  
