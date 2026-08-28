@@ -19,7 +19,7 @@ st.set_page_config(
 )
 
 # -------------------------------------------------------------
-# 2. DESIGN SYSTEM & HIGH-CONTRAST CSS
+# 2. DESIGN SYSTEM & HIGH-CONTRAST CSS (GLOBAL FIX FOR DROPDOWNS)
 # -------------------------------------------------------------
 CUSTOM_CSS = """
 <style>
@@ -31,7 +31,7 @@ CUSTOM_CSS = """
     --text-primary: #0F172A;
     --text-secondary: #334155;
     --text-muted: #64748B;
-    --border-color: #E2E8F0;
+    --border-color: #CBD5E1;
     --card-bg: #F8FAFC;
     --primary-blue: #2563EB;
     --emerald-green: #059669;
@@ -40,13 +40,13 @@ CUSTOM_CSS = """
     --purple-overstock: #7C3AED;
 }
 
-html, body, [class*="css"], .stMarkdown, .stText, p, span, label, div, input {
+html, body, [class*="css"], .stMarkdown, .stText, p, span, label, div, input, button {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    color: #0F172A;
 }
 
 .stApp {
     background-color: #FFFFFF !important;
+    color: #0F172A !important;
 }
 
 /* Headings */
@@ -58,7 +58,119 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
 }
 
-/* Sidebar Custom Styling */
+/* ========================================================================= */
+/* CRITICAL FIX: STREAMLIT BASEWEB DROPDOWNS, LISTBOXES & POPOVER MENUS     */
+/* ========================================================================= */
+
+/* Popover Dropdown Container */
+div[data-baseweb="popover"],
+div[data-baseweb="menu"],
+ul[role="listbox"],
+div[data-baseweb="popover"] > div {
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.1) !important;
+}
+
+/* Individual Dropdown Options */
+li[role="option"],
+div[data-baseweb="menu"] li,
+ul[role="listbox"] li {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    font-size: 0.90rem !important;
+    font-weight: 500 !important;
+    padding: 10px 14px !important;
+    border-bottom: 1px solid #F1F5F9 !important;
+    transition: background-color 0.1s ease, color 0.1s ease !important;
+}
+
+/* Dropdown Option Inner Text / Spans */
+li[role="option"] span,
+li[role="option"] div,
+ul[role="listbox"] li * {
+    color: #0F172A !important;
+    font-weight: 500 !important;
+}
+
+/* Hover State in Dropdown Menu */
+li[role="option"]:hover,
+li[role="option"][aria-selected="true"]:hover,
+ul[role="listbox"] li:hover,
+div[data-baseweb="menu"] li:hover {
+    background-color: #EFF6FF !important;
+    color: #1D4ED8 !important;
+}
+
+li[role="option"]:hover *,
+ul[role="listbox"] li:hover * {
+    color: #1D4ED8 !important;
+    font-weight: 600 !important;
+}
+
+/* Selected Option in Dropdown Menu */
+li[role="option"][aria-selected="true"],
+ul[role="listbox"] li[aria-selected="true"] {
+    background-color: #F8FAFC !important;
+    color: #1E293B !important;
+    font-weight: 700 !important;
+}
+
+/* Selectbox and Multiselect Input Controls (Closed & Open) */
+div[data-baseweb="select"] {
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 6px !important;
+}
+
+div[data-baseweb="select"]:hover {
+    border-color: #94A3B8 !important;
+}
+
+div[data-baseweb="select"]:focus-within {
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 1px #2563EB !important;
+}
+
+div[data-baseweb="select"] input {
+    color: #0F172A !important;
+    font-weight: 500 !important;
+}
+
+div[data-baseweb="select"] input::placeholder {
+    color: #64748B !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
+}
+
+/* Selected Tags inside Multiselect */
+div[data-baseweb="select"] [data-baseweb="tag"] {
+    background-color: #EFF6FF !important;
+    border: 1px solid #BFDBFE !important;
+    color: #1D4ED8 !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    padding: 2px 6px !important;
+}
+
+div[data-baseweb="select"] [data-baseweb="tag"] * {
+    color: #1D4ED8 !important;
+}
+
+div[data-baseweb="select"] [data-baseweb="tag"] span[role="presentation"] {
+    color: #1D4ED8 !important;
+}
+
+/* Clear & Arrow Icons inside selectboxes */
+div[data-baseweb="select"] svg {
+    fill: #475569 !important;
+}
+
+/* ========================================================================= */
+/* SIDEBAR, METRIC CARDS & NAVIGATION STYLING                                */
+/* ========================================================================= */
+
 [data-testid="stSidebar"] {
     background-color: #F8FAFC !important;
     border-right: 1px solid #E2E8F0 !important;
@@ -70,30 +182,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 [data-testid="stSidebar"] label {
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     color: #1E293B !important;
-    font-size: 0.85rem !important;
+    font-size: 0.82rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.04em !important;
+    margin-bottom: 4px !important;
 }
 
-/* Multiselect Tags & Selectbox */
-.stMultiSelect div[data-baseweb="select"] {
-    background-color: #FFFFFF !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 6px !important;
-}
-.stMultiSelect [data-baseweb="tag"] {
-    background-color: #EFF6FF !important;
-    color: #1D4ED8 !important;
-    border: 1px solid #BFDBFE !important;
-    font-weight: 600 !important;
-}
-.stMultiSelect [data-baseweb="tag"] span {
-    color: #1D4ED8 !important;
-}
-
-/* Radio Navigation Styling */
+/* Navigation Radio Blocks */
 [data-testid="stSidebar"] div[role="radiogroup"] > label {
     background-color: #FFFFFF;
     border: 1px solid #E2E8F0;
@@ -161,22 +258,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 8px;
 }
 
-/* Status Badges */
-.status-pill {
-    display: inline-block;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-.pill-danger { background-color: #FFE4E6; color: #BE123C; border: 1px solid #FECDD3; }
-.pill-warning { background-color: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
-.pill-primary { background-color: #DBEAFE; color: #1D4ED8; border: 1px solid #BFDBFE; }
-.pill-purple { background-color: #F3E8FF; color: #6B21A8; border: 1px solid #E9D5FF; }
-.pill-success { background-color: #D1FAE5; color: #047857; border: 1px solid #A7F3D0; }
-
 /* Buttons */
 .stButton > button {
     background-color: #2563EB !important;
@@ -210,7 +291,19 @@ h1, h2, h3, h4, h5, h6 {
     color: #1E293B;
 }
 
-/* Block container padding */
+/* Text Search Input */
+.stTextInput input {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+}
+.stTextInput input:focus {
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 1px #2563EB !important;
+}
+
 .block-container {
     padding-top: 1.8rem !important;
     padding-bottom: 2.5rem !important;
@@ -251,7 +344,7 @@ def apply_chart_theme(fig, height=330):
         ),
         legend=dict(
             font=dict(size=11, color="#0F172A", family="Outfit"),
-            bgcolor="rgba(255,255,255,0.8)",
+            bgcolor="rgba(255,255,255,0.85)",
             bordercolor="#E2E8F0",
             borderwidth=1
         )
